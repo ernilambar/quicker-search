@@ -1,13 +1,13 @@
 <?php
 /**
  * Plugin Name: Quicker Search
- * Plugin URI:
- * Description: Quicker Search
- * Version: 1.0
- * Author: WEN Themes
- * Author URI:
- * Requires at least: 4.2
- * Tested up to: 4.4
+ * Plugin URI: https://github.com/ernilambar/quicker-search
+ * Description: Quickly search posts or pages quickly in admin listing.
+ * Version: 1.0.0
+ * Author: Nilambar Sharma
+ * Author URI: http://nilambar.net
+ * Requires at least: 4.7
+ * Tested up to: 4.7
  * Text Domain: quicker-search
  *
  * @package Quicker_Search
@@ -158,7 +158,7 @@ if ( ! class_exists( 'Quicker_Search' ) ) :
         function init() {
 
             // Load plugin text domain.
-            load_plugin_textdomain( 'quicker-search', false, basename( dirname( __FILE__ ) ) . '/languages' );
+            load_plugin_textdomain( 'quicker-search' );
 
         }
 
@@ -172,14 +172,14 @@ if ( ! class_exists( 'Quicker_Search' ) ) :
             if ( ! current_user_can( 'manage_options' ) ) {
                 return;
             }
-            if ( true !== class_exists( 'WP_REST_Controller' ) ) {
 
-                $string = 'Quicker Search Notice: WordPress REST API plugin is required.';
-                $string .= ' <a href="https://wordpress.org/plugins/rest-api/" target="_blank">WordPress REST API</a>';
+            // Bail if not WP 4.7.
+            if ( ! function_exists( 'wp_get_custom_css_post' ) ) {
+                $string = 'Quicker Search Notice: WordPress 4.7 is required.';
                 echo '<div id="message" class="error">';
                 echo '<p>' . $string . '</p>';
                 echo '</div>';
-
+                return;
             }
 
         }
