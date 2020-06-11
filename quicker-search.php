@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Quicker Search
  * Plugin URI: https://github.com/ernilambar/quicker-search
- * Description: Quickly search posts or pages quickly in admin listing.
+ * Description: Quickly search posts or pages in admin listing.
  * Version: 1.0.1
  * Author: Nilambar Sharma
  * Author URI: https://WWW.nilambar.net
