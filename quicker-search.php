@@ -3,7 +3,7 @@
  * Plugin Name: Quicker Search
  * Plugin URI: https://github.com/ernilambar/quicker-search
  * Description: Quickly search posts or pages in admin listing.
- * Version: 1.0.3
+ * Version: 1.0.4
  * Author: Nilambar Sharma
  * Author URI: https://WWW.nilambar.net
  * Requires at least: 5.2
@@ -32,9 +32,9 @@ define( 'QUICKER_SEARCH_URL', rtrim( plugin_dir_url( __FILE__ ), '/' ) );
 function quicker_search_load_assets() {
 	wp_enqueue_style( 'quicker-search-smoothness', QUICKER_SEARCH_URL . '/css/smoothness/jquery-ui.css', '', '1.11.4' );
 
-	wp_enqueue_style( 'quicker-search-style', QUICKER_SEARCH_URL . '/css/custom.css', '', '1.0.0' );
+	wp_enqueue_style( 'quicker-search-style', QUICKER_SEARCH_URL . '/css/custom.css', '', '1.0.4' );
 
-	wp_register_script( 'quicker-search-custom', QUICKER_SEARCH_URL . '/js/custom.js', array( 'jquery', 'jquery-ui-core', 'jquery-ui-autocomplete' ), '1.0.0', true );
+	wp_register_script( 'quicker-search-custom', QUICKER_SEARCH_URL . '/js/custom.js', array( 'jquery', 'jquery-ui-core', 'jquery-ui-autocomplete' ), '1.0.4', true );
 
 	global $wp_post_types;
 	$cur_screen = get_current_screen();
