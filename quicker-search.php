@@ -9,6 +9,7 @@
  * Requires at least: 5.2
  * Tested up to: 5.9
  * GitHub Plugin URI: ernilambar/quicker-search
+ * Primary Branch: main
  * Text Domain: quicker-search
  *
  * @package Quicker_Search
