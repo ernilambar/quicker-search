@@ -44,9 +44,6 @@ function quicker_search_load_assets() {
 
 	wp_enqueue_style( 'quicker-search-style', QUICKER_SEARCH_URL . '/build/search.css', '', $script_asset['version'] );
 
-	$script_asset['dependencies'][] = 'jquery-ui-core';
-	$script_asset['dependencies'][] = 'jquery-ui-autocomplete';
-
 	wp_register_script( 'quicker-search-custom', QUICKER_SEARCH_URL . '/build/search.js', $script_asset['dependencies'], $script_asset['version'], true );
 
 	global $wp_post_types;
