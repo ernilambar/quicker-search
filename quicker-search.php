@@ -36,8 +36,6 @@ if ( file_exists( QUICKER_SEARCH_DIR . '/vendor/autoload.php' ) ) {
  * @since 1.0.0
  */
 function quicker_search_load_assets() {
-	wp_enqueue_style( 'quicker-search-smoothness', QUICKER_SEARCH_URL . '/third-party/smoothness/jquery-ui.css', '', '1.11.4' );
-
 	$script_asset_path = QUICKER_SEARCH_DIR . '/build/search.asset.php';
 	$script_asset      = file_exists( $script_asset_path ) ? require $script_asset_path : array(
 		'dependencies' => array(),
