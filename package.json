@@ -1,0 +1,51 @@
+{
+	"name": "quicker-search",
+	"version": "1.0.5",
+	"description": "Quicker Search",
+	"author": "Nilambar Sharma",
+	"license": "GPL-2.0-or-later",
+	"main_file": "quicker-search.php",
+	"keywords": [
+		"wordpress",
+		"wordpress-plugin"
+	],
+	"homepage": "https://github.com/ernilambar/quicker-search/",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/ernilambar/quicker-search/"
+	},
+	"bugs": {
+		"url": "https://github.com/ernilambar/quicker-search/issues"
+	},
+	"browserslist": "> 1%, not dead",
+	"packtor": {
+		"files": [
+			"**/*",
+			"!*.js",
+			"!*.json",
+			"!*.lock",
+			"!*.yaml",
+			"!src/**/*",
+			"!vendor/yahnis-elsts/plugin-update-checker/languages/*"
+		]
+	},
+	"devDependencies": {
+		"@wordpress/scripts": "^26.9.0",
+		"easy-replace-in-files": "^1.0.3",
+		"packtor": "^1.0.2",
+		"shx": "^0.3.4"
+	},
+	"scripts": {
+		"dev": "wp-scripts start",
+		"build": "wp-scripts build",
+		"lint:css": "wp-scripts lint-style 'src/**/*.{css,scss}'",
+		"lint:css:fix": "wp-scripts lint-style 'src/**/*.{css,scss}' --fix",
+		"lint:js": "wp-scripts lint-js ./src webpack.config.js",
+		"lint:js:fix": "wp-scripts lint-js ./src webpack.config.js --fix",
+		"lint:json:fix": "wp-scripts format *.json",
+		"version": "easy-replace-in-files",
+		"ready:vendor": "shx rm -rf vendor/ && composer install --no-dev --no-scripts -o",
+		"predeploy": "pnpm run ready:vendor",
+		"deploy": "packtor"
+	}
+}
