@@ -5,6 +5,9 @@ settings:
   excludeLinksFromLockfile: false
 
 devDependencies:
+  '@tarekraafat/autocomplete.js':
+    specifier: ^10.2.7
+    version: 10.2.7
   '@wordpress/scripts':
     specifier: ^26.9.0
     version: 26.9.0(react-dom@18.2.0)(react@18.2.0)(typescript@5.1.6)
@@ -1999,6 +2002,10 @@ packages:
       '@svgr/plugin-svgo': 6.5.1(@svgr/core@6.5.1)
     transitivePeerDependencies:
       - supports-color
+    dev: true
+
+  /@tarekraafat/autocomplete.js@10.2.7:
+    resolution: {integrity: sha512-iE+dnXI8/LrTaSORrnNdSyXg/bFCbCpz/R5GUdB3ioW+9PVEhglxNcSDQNeCXtrbRG0kOBFUd4unEiwcmqyn8A==}
     dev: true
 
   /@tootallnate/once@2.0.0:

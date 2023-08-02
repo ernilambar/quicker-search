@@ -1,55 +1,65 @@
-import "./scss/search.scss";
+import autoComplete from '@tarekraafat/autocomplete.js';
 
-import $ from 'jquery';
+import './scss/search.scss';
 
-( function ( $ ) {
-	$( document ).ready( function ( $ ) {
-		let post_api_url = '';
+const searchInput = document.getElementById( 'post-search-input' );
 
-		if ( '' !== quickerSearchSettings.post_type ) {
-			if ( 'post' === quickerSearchSettings.post_type ) {
-				post_api_url =
-					quickerSearchSettings.home_url + '/wp-json/wp/v2/posts';
-			} else if ( 'page' === quickerSearchSettings.post_type ) {
-				post_api_url =
-					quickerSearchSettings.home_url + '/wp-json/wp/v2/pages';
-			} else {
-				post_api_url =
-					quickerSearchSettings.home_url +
-					'/wp-json/wp/v2/' +
-					quickerSearchSettings.post_type;
-			}
+if ( searchInput ) {
+	let postApiUrl = '';
+
+	if ( '' !== quickerSearchSettings.post_type ) {
+		if ( 'post' === quickerSearchSettings.post_type ) {
+			postApiUrl = quickerSearchSettings.rest_url + 'wp/v2/posts';
+		} else if ( 'page' === quickerSearchSettings.post_type ) {
+			postApiUrl = quickerSearchSettings.rest_url + 'wp/v2/pages';
+		} else {
+			postApiUrl =
+				quickerSearchSettings.rest_url +
+				'/wp/v2/' +
+				quickerSearchSettings.post_type;
 		}
+	}
 
-		if ( '' !== post_api_url ) {
-			$( '#post-search-input' ).autocomplete( {
-				source( request, response ) {
-					$.ajax( {
-						url: post_api_url,
-						data: {
-							search: request.term,
-						},
-						success( data ) {
-							response(
-								$.map( data, function ( item ) {
-									return {
-										label: item.title.rendered,
-										id: item.id,
-									};
-								} )
-							);
-						},
+	new autoComplete( {
+		selector: '#post-search-input',
+		placeHolder: 'Search keyword...',
+		threshold: 3,
+		debounce: 300,
+		data: {
+			src: async ( query ) => {
+				try {
+					const source = await fetch(
+						postApiUrl + '?search=' + query
+					);
+
+					const data = await source.json();
+
+					const posts = [];
+
+					data.forEach( ( item ) => {
+						posts.push( {
+							id: item.id,
+							title: item.title.rendered,
+						} );
 					} );
-				},
-				minLength: 2,
-				select( event, ui ) {
-					window.location.href =
-						quickerSearchSettings.admin_url +
-						'post.php?post=' +
-						ui.item.id +
-						'&action=edit';
-				},
-			} );
-		}
+					return posts;
+				} catch ( error ) {
+					return error;
+				}
+			},
+			keys: [ 'title' ],
+		},
+		resultItem: {
+			tag: 'li',
+			class: 'autoComplete_result',
+			element: ( item, data ) => {
+				const url =
+					quickerSearchSettings.admin_url +
+					'post.php?post=' +
+					data.value.id +
+					'&action=edit';
+				item.innerHTML = `<a href='${ url }'>${ data.value.title }</a>`;
+			},
+		},
 	} );
-} )( jQuery );
+}

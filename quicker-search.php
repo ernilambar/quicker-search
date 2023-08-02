@@ -65,6 +65,7 @@ function quicker_search_load_assets() {
 
 	$custom_args = array(
 		'home_url'  => home_url(),
+		'rest_url'  => rest_url(),
 		'admin_url' => admin_url(),
 		'post_type' => $correct_post_type,
 		'tax_type'  => $cur_screen->taxonomy,
