@@ -5,19 +5,20 @@
 
 .autoComplete_wrapper > ul {
 	position: absolute;
-	max-height: 226px;
+	width: 300px;
 	overflow-y: scroll;
 	box-sizing: border-box;
 	left: 0;
 	right: 0;
 	margin: 2rem 0 0 0;
-	padding: 0;
+	padding: 8px;
 	z-index: 1;
 	list-style: none;
 	border-radius: 0.6rem;
 	background-color: #fff;
 	outline: none;
 	transition: opacity 0.15s ease-in-out;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .autoComplete_wrapper > ul[hidden],
@@ -28,21 +29,27 @@
 }
 
 .autoComplete_wrapper > ul > li {
-	margin: 0.3rem;
-	padding: 0.3rem 0.5rem;
+	margin: 0;
+	padding: 0;
 	text-align: left;
 	font-size: 1rem;
 	color: #212121;
-	border-radius: 0.35rem;
-	white-space: nowrap;
-	overflow: hidden;
-	text-overflow: ellipsis;
 	transition: all 0.2s ease;
+	margin-bottom: 5px;
+
+	a {
+		font-size: 13px;
+		display: block;
+		text-decoration: none;
+
+		&:hover {
+			text-decoration: underline;
+		}
+	}
 }
 
 .autoComplete_wrapper > ul > li:hover {
 	cursor: pointer;
-	background-color: rgba(100, 100, 100, 0.15);
 }
 
 @media only screen and (max-width: 600px) {
