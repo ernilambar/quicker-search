@@ -16,19 +16,13 @@ if ( searchInput ) {
 					const formData = new FormData();
 					formData.append( 'action', 'qs_get_posts' );
 					formData.append( 'keyword', query );
-					formData.append(
-						'post_type',
-						quickerSearchSettings.post_type
-					);
+					formData.append( 'post_type', QUICKER_SEARCH.post_type );
 
-					const source = await fetch(
-						quickerSearchSettings.ajax_url,
-						{
-							method: 'POST',
-							credentials: 'same-origin',
-							body: formData,
-						}
-					);
+					const source = await fetch( QUICKER_SEARCH.ajax_url, {
+						method: 'POST',
+						credentials: 'same-origin',
+						body: formData,
+					} );
 
 					const data = await source.json();
 
@@ -53,10 +47,7 @@ if ( searchInput ) {
 			class: 'autoComplete_result',
 			element: ( item, data ) => {
 				const url =
-					quickerSearchSettings.admin_url +
-					'post.php?post=' +
-					data.value.id +
-					'&action=edit';
+					QUICKER_SEARCH.admin_url + 'post.php?post=' + data.value.id + '&action=edit';
 				item.innerHTML = `<a href='${ url }'>${ data.value.title }</a>`;
 			},
 		},
