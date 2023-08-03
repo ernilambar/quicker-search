@@ -25,21 +25,18 @@ function quicker_search_load_assets() {
 		'version'      => filemtime( __FILE__ ),
 	);
 
-	wp_enqueue_style( 'quicker-search-style', QUICKER_SEARCH_URL . '/build/search.css', '', $script_asset['version'] );
+	wp_enqueue_style( 'quicker-search', QUICKER_SEARCH_URL . '/build/search.css', '', $script_asset['version'] );
 
-	wp_register_script( 'quicker-search-custom', QUICKER_SEARCH_URL . '/build/search.js', $script_asset['dependencies'], $script_asset['version'], true );
+	wp_register_script( 'quicker-search', QUICKER_SEARCH_URL . '/build/search.js', $script_asset['dependencies'], $script_asset['version'], true );
 
-	$custom_args = array(
-		'home_url'  => home_url(),
-		'rest_url'  => rest_url(),
+	$data = array(
 		'admin_url' => admin_url(),
 		'ajax_url'  => admin_url( 'admin-ajax.php' ),
 		'post_type' => $cur_screen->post_type,
-		'tax_type'  => $cur_screen->taxonomy,
 	);
 
-	wp_localize_script( 'quicker-search-custom', 'quickerSearchSettings', $custom_args );
-	wp_enqueue_script( 'quicker-search-custom' );
+	wp_localize_script( 'quicker-search', 'QUICKER_SEARCH', $data );
+	wp_enqueue_script( 'quicker-search' );
 }
 
 add_action( 'admin_enqueue_scripts', 'quicker_search_load_assets' );
