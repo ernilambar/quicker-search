@@ -5,31 +5,29 @@ import './scss/search.scss';
 const searchInput = document.getElementById( 'post-search-input' );
 
 if ( searchInput ) {
-	let postApiUrl = '';
-
-	if ( '' !== quickerSearchSettings.post_type ) {
-		if ( 'post' === quickerSearchSettings.post_type ) {
-			postApiUrl = quickerSearchSettings.rest_url + 'wp/v2/posts';
-		} else if ( 'page' === quickerSearchSettings.post_type ) {
-			postApiUrl = quickerSearchSettings.rest_url + 'wp/v2/pages';
-		} else {
-			postApiUrl =
-				quickerSearchSettings.rest_url +
-				'/wp/v2/' +
-				quickerSearchSettings.post_type;
-		}
-	}
-
 	new autoComplete( {
 		selector: '#post-search-input',
 		placeHolder: 'Search keyword...',
 		threshold: 3,
-		debounce: 300,
+		debounce: 100,
 		data: {
 			src: async ( query ) => {
 				try {
+					const formData = new FormData();
+					formData.append( 'action', 'qs_get_posts' );
+					formData.append( 'keyword', query );
+					formData.append(
+						'post_type',
+						quickerSearchSettings.post_type
+					);
+
 					const source = await fetch(
-						postApiUrl + '?search=' + query
+						quickerSearchSettings.ajax_url,
+						{
+							method: 'POST',
+							credentials: 'same-origin',
+							body: formData,
+						}
 					);
 
 					const data = await source.json();
@@ -39,9 +37,10 @@ if ( searchInput ) {
 					data.forEach( ( item ) => {
 						posts.push( {
 							id: item.id,
-							title: item.title.rendered,
+							title: item.title,
 						} );
 					} );
+
 					return posts;
 				} catch ( error ) {
 					return error;

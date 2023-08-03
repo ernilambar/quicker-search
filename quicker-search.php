@@ -62,6 +62,7 @@ function quicker_search_load_assets() {
 		'home_url'  => home_url(),
 		'rest_url'  => rest_url(),
 		'admin_url' => admin_url(),
+		'ajax_url' => admin_url( 'admin-ajax.php' ),
 		'post_type' => $correct_post_type,
 		'tax_type'  => $cur_screen->taxonomy,
 	);
@@ -72,6 +73,55 @@ function quicker_search_load_assets() {
 
 add_action( 'admin_enqueue_scripts', 'quicker_search_load_assets' );
 
+function quicker_search_get_searched_posts( $keyword, $post_type ) {
+	$output = array();
 
+	$qargs = array(
+		'post_type'      => $post_type,
+		'post_status'    => 'publish',
+		'posts_per_page' => 5,
+		'no_found_rows'  => true,
+		's'              => $keyword,
+	);
+
+	$the_query = new WP_Query( $qargs );
+
+	if ( $the_query->have_posts()) {
+		while ( $the_query->have_posts()) {
+			$the_query->the_post();
+
+			$item = array();
+
+			$item['id'] = get_the_ID();
+			$item['title'] = get_the_title();
+
+			$output[] = $item;
+		}
+
+		wp_reset_postdata();
+	}
+
+	return $output;
+}
+
+function quicker_search_get_posts_callback() {
+	$keyword = isset($_REQUEST['keyword']) ? sanitize_text_field($_REQUEST['keyword']) : '';
+	$post_type = isset($_REQUEST['post_type']) ? sanitize_text_field($_REQUEST['post_type']) : '';
+	$data = array(
+		'id' => 1,
+		'title' => 'Nepal',
+		'key' => $keyword
+	);
+
+	$data = quicker_search_get_searched_posts( $keyword, $post_type );
+
+	wp_send_json( $data );
+	exit;
+}
+
+add_action('wp_ajax_qs_get_posts', 'quicker_search_get_posts_callback');
+add_action('wp_ajax_nopriv_qs_get_posts', 'quicker_search_get_posts_callback');
+
+// Updater.
 $nsnd_update_checker = \YahnisElsts\PluginUpdateChecker\v5\PucFactory::buildUpdateChecker( 'https://github.com/ernilambar/quicker-search', __FILE__, QUICKER_SEARCH_SLUG );
 $nsnd_update_checker->getVcsApi()->enableReleaseAssets();
