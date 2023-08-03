@@ -50,20 +50,12 @@ function quicker_search_load_assets() {
 
 	$cur_screen = get_current_screen();
 
-	$correct_post_type = '';
-
-	if ( ! empty( $cur_screen->post_type ) ) {
-		if ( isset( $wp_post_types[ $cur_screen->post_type ]->show_in_rest ) && 1 === absint( $wp_post_types[ $cur_screen->post_type ]->show_in_rest ) ) {
-			$correct_post_type = $cur_screen->post_type;
-		}
-	}
-
 	$custom_args = array(
 		'home_url'  => home_url(),
 		'rest_url'  => rest_url(),
 		'admin_url' => admin_url(),
 		'ajax_url' => admin_url( 'admin-ajax.php' ),
-		'post_type' => $correct_post_type,
+		'post_type' => $cur_screen->post_type,
 		'tax_type'  => $cur_screen->taxonomy,
 	);
 
