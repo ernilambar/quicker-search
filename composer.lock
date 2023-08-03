@@ -4,8 +4,50 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9f1c1bc9e6fb0b237a5ad8c259223c5c",
+    "content-hash": "2cd8b26422d43b600bf3f2c9ed50d29c",
     "packages": [
+        {
+            "name": "ernilambar/optioner",
+            "version": "2.0.9",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ernilambar/optioner.git",
+                "reference": "b7ef22ac76b49afd6c2229451ff5909f794463f5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ernilambar/optioner/zipball/b7ef22ac76b49afd6c2229451ff5909f794463f5",
+                "reference": "b7ef22ac76b49afd6c2229451ff5909f794463f5",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.6"
+            },
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nilambar Sharma",
+                    "email": "nilambar@outlook.com",
+                    "homepage": "https://www.nilambar.net",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Minimal option framework for WordPress plugins",
+            "homepage": "https://github.com/ernilambar/optioner",
+            "keywords": [
+                "option",
+                "wordpress"
+            ],
+            "support": {
+                "issues": "https://github.com/ernilambar/optioner/issues",
+                "source": "https://github.com/ernilambar/optioner/tree/2.0.9"
+            },
+            "time": "2023-04-30T09:04:01+00:00"
+        },
         {
             "name": "yahnis-elsts/plugin-update-checker",
             "version": "v5.1",
