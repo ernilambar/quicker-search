@@ -5,7 +5,9 @@
 
 .autoComplete_wrapper > ul {
 	position: absolute;
-	width: 300px;
+	width: max-content;
+	max-width: 290px;
+	min-width: 175px;
 	overflow-y: scroll;
 	box-sizing: border-box;
 	left: 0;
