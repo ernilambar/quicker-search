@@ -33,6 +33,7 @@
 		"@tarekraafat/autocomplete.js": "^10.2.7",
 		"@wordpress/scripts": "^26.9.0",
 		"easy-replace-in-files": "^1.0.3",
+		"node-wp-i18n": "^1.2.7",
 		"packtor": "^1.0.2",
 		"shx": "^0.3.4"
 	},
@@ -44,9 +45,12 @@
 		"lint:js": "wp-scripts lint-js ./src webpack.config.js",
 		"lint:js:fix": "wp-scripts lint-js ./src webpack.config.js --fix",
 		"lint:json:fix": "wp-scripts format *.json",
+		"td": "wpi18n addtextdomain --exclude=vendor,deploy,node_modules",
+		"pot": "wpi18n makepot --domain-path=languages --exclude=vendor,deploy,node_modules",
 		"version": "easy-replace-in-files",
 		"ready:vendor": "shx rm -rf vendor/ && composer install --no-dev --no-scripts -o",
-		"predeploy": "pnpm run ready:vendor",
+		"ready:build": "shx rm -rf build/ && pnpm run build",
+		"predeploy": "pnpm run ready:vendor && pnpm run ready:build",
 		"deploy": "packtor"
 	}
 }
