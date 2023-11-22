@@ -54,6 +54,7 @@ local-xdebuginfo.php
 /build/
 /deploy/
 /docs/
+/languages/
 /node_modules/
 /tests/
 /vendor/
