@@ -26,12 +26,13 @@
 			"!*.lock",
 			"!*.yaml",
 			"!src/**/*",
+			"!languages/**/*",
 			"!vendor/yahnis-elsts/plugin-update-checker/languages/*"
 		]
 	},
 	"devDependencies": {
 		"@tarekraafat/autocomplete.js": "^10.2.7",
-		"@wordpress/scripts": "^26.9.0",
+		"@wordpress/scripts": "^26.17.0",
 		"easy-replace-in-files": "^1.0.3",
 		"node-wp-i18n": "^1.2.7",
 		"packtor": "^1.0.2",

@@ -84,3 +84,31 @@ function quicker_search_get_posts_callback() {
 
 add_action( 'wp_ajax_qs_get_posts', 'quicker_search_get_posts_callback' );
 add_action( 'wp_ajax_nopriv_qs_get_posts', 'quicker_search_get_posts_callback' );
+
+/**
+ * Customize plugin action links.
+ *
+ * @since 1.0.6
+ *
+ * @param array $actions Action links.
+ * @return array Modified action links.
+ */
+function quicker_search_customize_plugin_links( $actions ) {
+	$url = add_query_arg(
+		array(
+			'page' => 'quicker-search',
+		),
+		admin_url( 'options-general.php' )
+	);
+
+	$actions = array_merge(
+		array(
+			'settings' => '<a href="' . esc_url( $url ) . '">' . esc_html__( 'Settings', 'quicker-search' ) . '</a>',
+		),
+		$actions
+	);
+
+	return $actions;
+}
+
+add_filter( 'plugin_action_links_' . QUICKER_SEARCH_BASE_FILENAME, 'quicker_search_customize_plugin_links' );

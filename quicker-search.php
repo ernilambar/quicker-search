@@ -23,6 +23,7 @@ define( 'QUICKER_SEARCH_BASENAME', basename( __DIR__ ) );
 define( 'QUICKER_SEARCH_SLUG', 'quicker-search' );
 define( 'QUICKER_SEARCH_DIR', rtrim( plugin_dir_path( __FILE__ ), '/' ) );
 define( 'QUICKER_SEARCH_URL', rtrim( plugin_dir_url( __FILE__ ), '/' ) );
+define( 'QUICKER_SEARCH_BASE_FILENAME', plugin_basename( __FILE__ ) );
 
 // Include autoload.
 if ( file_exists( QUICKER_SEARCH_DIR . '/vendor/autoload.php' ) ) {
