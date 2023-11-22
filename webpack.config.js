@@ -6,5 +6,6 @@ module.exports = {
 	...defaultConfig,
 	entry: {
 		search: path.resolve( __dirname, 'src', 'search.js' ),
+		settings: path.resolve( __dirname, 'src', 'settings.js' ),
 	},
 };
