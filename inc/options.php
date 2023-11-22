@@ -116,3 +116,42 @@ function quicker_search_get_post_types_options() {
 
 	return $output;
 }
+
+/**
+ * Customize post types field.
+ *
+ * @since 1.0.0
+ *
+ * @param string $field_id Field ID.
+ */
+function quicker_search_add_custom_links( $field_id ) {
+	if ( 'post_types' !== $field_id ) {
+		return;
+	}
+	?>
+	<a href="#" id="qs-btn-select-all"><?php esc_html_e( 'Select All', 'quicker-search' ) ?></a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="#" id="qs-btn-select-none"><?php esc_html_e( 'Select None', 'quicker-search' ) ?></a>
+	<?php
+}
+
+add_action( 'optioner_field_bottom_multicheck', 'quicker_search_add_custom_links', 10, 1 );
+
+/**
+ * Load settings assets.
+ *
+ * @since 1.0.6
+ */
+function quicker_search_load_settings_assets( $hook ) {
+	if ( 'settings_page_quicker-search' !== $hook ) {
+		return;
+	}
+
+	$script_asset_path = QUICKER_SEARCH_DIR . '/build/settings.asset.php';
+	$script_asset      = file_exists( $script_asset_path ) ? require $script_asset_path : array(
+		'dependencies' => array(),
+		'version'      => filemtime( __FILE__ ),
+	);
+
+	wp_enqueue_script( 'quicker-search-settings', QUICKER_SEARCH_URL . '/build/settings.js', $script_asset['dependencies'], $script_asset['version'], true );
+}
+
+add_action( 'admin_enqueue_scripts', 'quicker_search_load_settings_assets' );
